@@ -5,9 +5,11 @@ title: "R Markdown Centered Data Analysis Workflow"
 subtitle: "(bonus: how to use Python in R Markdown using reticulate)"
 date: "2019-10-16 <br>(updated `r Sys.Date()`)"
 output:
-  pdf_document:
+  html_document:
     toc: true
     number_sections: true
+    theme: united
+    highlight: textmate
 ---
 
 # Introduction
@@ -88,7 +90,7 @@ df %>%  ggplot(aes(x = Result, y = n)) +
 
 ``` 
 
-- Again, output from 'head' and 'ggplot' commands were displayed without manual printing
+- Again, output from 'head' and 'ggplot' commands were displayed without manual printing.
 
 Objects from above R code snippets can be accessed/used throughout this Rmd document, typically when describing the findings from the snippet. E.g., below findings are calculated inline using objects from above chunk. 
 
@@ -99,8 +101,8 @@ Since 1949-1950 season,
 
 Findings follow:
 
-- Note again that if snippets are run within Rmd, then no manual print command is needed to print plot
-- The home (Rmd) document can become clogged easily
+- Note again that if snippets are run within Rmd, then no manual print command is needed to print plot.
+- The home (Rmd) document can become clogged easily.
 
 So we've seen how we can use R code snippets in Rmd document, which can be effective for small operations. For more complex operations that require a bit more lines of codes, working directly with code snippets within Rmd document may not be ideal for various reasons. In this case, we can save those (many) lines of codes in separate script files, then source them in Rmd document. First, a hybrid of the two:
 
@@ -115,8 +117,10 @@ hello("Jay")
 
 ```
 
+We can describe what the source R script file does here.
+
 - This allows functions to be defined in another .R script, then used in the home (Rmd) document
-- The home Rmd document can become clogged easily still
+- Above example uses only one function from the source R script file, but the chunk can become clogged easily just as in the case of running code snippets directly from the home (Rmd) document. 
 
 ### Displaying outputs from R script files within Rmd document
 
@@ -223,6 +227,8 @@ exec(open("py/src_python_script.py").read()) # for Python3
 
 Lastly, we can also run R code snippets using Python objects that are defined earlier in R Markdown (and vice versa, i.e., run Python code snippets using R objects). 
 
+### Using Python objects in R chunk
+
 If you are more comfortable working with ggplot2 in R than say pyplot in Python, then you can use Python objects in an R chunk like below.
 
 ```{r r_snippet_using_py_objs, eval = TRUE}
@@ -237,6 +243,8 @@ df_r %>% count(x1) %>%
 ```
 
 - Note how Python objects are referred to in an R chunk (by py\$). 
+
+### Using R objects in Python chunk
 
 The opposite case is to use R objects in a Python chunk. 
 
@@ -268,17 +276,22 @@ There are several options to view the output document.
     - send email from R with attachment 
     - SimpleHTTPServer from Python
 
-# R Markdown-centered data analysis workflow
+# R Markdown centered data analysis workflow (using Vim)
 
-1. Start three vim/REPL paired sessions
-    - session Rmd: for Rmd document (call it "home" document?) editing and interactive R session
-    - session R: for R script editing and interactive R session
-    - sesion py: for py script editing and interactive Python session
+1. Start three Vim/REPL paired sessions
+    - Session Rmd: for home (Rmd) document editing and interactive R computing
+    - Session R: for R script editing and interactive R computing
+    - Sesion Py: for Py script editing and interactive Python computing
 
-2. Start documenting project meta data, e.g., introduction, context, etc., in the home (Rmd) document 
+2. Start documenting project progress
+    - Provide context and describe data, etc. 
 
 3. Iteratively work on codes (R/Python), generate plots, and document findings 
-    - Make sure codes run successfully by checking outputs, e.g., plots from terminal (ssh -YC)
-    - If findings are worth noting, document them in home (Rmd) document, following corresponding code chunks
+    - Make sure codes run successfully by checking outputs from each corresponding session (e.g., check R codes work in session R, and Python codes work in session Py) 
+    - If findings are worth noting, document them in home (Rmd) document, immediately following code chunks
+    - Also document what needs to be done
 
-4. Render to html document and enjoy the output!
+4. Render to portable document (e.g., html/pdf) and enjoy the output!
+
+When you return to the project after 2-3 days/weeks/months away from it, we now have a summary document that describes what's done, what needs to be done, how it's done, etc., all in one home (Rmd) document!
+
