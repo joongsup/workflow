@@ -1,4 +1,5 @@
 .Rhistory
 rmd_workflow_files
 *.swp
-
+*.pyc
+py/__pycache__
