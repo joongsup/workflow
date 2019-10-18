@@ -1,18 +1,22 @@
 
-library(uncmbb)
+
+library(ggplot2)
 library(dplyr)
 
-df <- rbind(unc %>% mutate(school = "UNC"), duke %>% mutate(school = "Duke"))
-df <- df %>% dplyr::filter(Type == "NCAA") %>%
-             count(school, Result) %>%
-             add_percent(grouped_var = "school", var = "n")
-print(head(df))
+ncaa <- read.csv("data/champions.csv")
 
-p <- df %>%  ggplot(aes(x = Result, y = n)) +
-        geom_bar(aes(fill = school), stat = "identity", position = "dodge") +
-        geom_text(aes(group = school, label = n), position = position_dodge(width = 1), vjust = 0.01) +
-        labs(title = "UNC and Duke's NCAA results since 1949-1950 season") +
-        theme_bw()
+p <- ncaa %>% count(CHAMPION, COACH) %>%
+         arrange(desc(n)) %>%
+         filter(n >= 2)
+print(p)
+
+p <- ncaa %>% count(CHAMPION) %>%
+         arrange(desc(n)) %>% 
+         filter(n >= 3) %>%
+         ggplot(aes(x = reorder(CHAMPION, -n), y = n)) +
+         geom_bar(stat = "identity") +
+         labs(title = "NCAA Men's Basketball Champions (3+ Rings Club!)", x = "School") +
+         theme_bw()
 
 print(p)
 

@@ -1,0 +1,82 @@
+YEAR,CHAMPION,RECORD,COACH,SCORE,RUNNERUP,SITECT,SITEST
+2019,Virginia,35-3,Tony Bennett,85-77,Texas Tech,Minneapolis,Minn
+2018,Villanova,36-4,Jay Wright,79-62,Michigan,San Antonio,Texas
+2017,North Carolina,33-7,Roy Williams,71-65,Gonzaga,Glendale,Arizona
+2016,Villanova,35-5,Jay Wright,77-74,North Carolina,Houston,Texas
+2015,Duke,35-4,Mike Krzyzewski,68-63,Wisconsin,Indianapolis,Ind.
+2014,Connecticut,32-8,Kevin Ollie,60-54,Kentucky,Arlington,Texas
+2013,Louisville,35-5,Rick Pitino,82-76,Michigan,Atlanta,Ga.
+2012,Kentucky,38-2,John Calipari,67-59,Kansas,New Orleans,La.
+2011,Connecticut,32-9,Jim Calhoun,53-41,Butler,Houston,Texas
+2010,Duke,35-5,Mike Krzyzewski,61-59,Butler,Indianapolis,Ind.
+2009,North Carolina,34-4,Roy Williams,89-72,Michigan State,Detroit,Mich.
+2008,Kansas,37-3,Bill Self,75-68 (OT),Memphis,San Antonio,Texas
+2007,Florida,35-5,Billy Donovan,84-75,Ohio State,Atlanta,Ga.
+2006,Florida,33-6,Billy Donovan,73-57,UCLA,Indianapolis,Ind.
+2005,North Carolina,33-4,Roy Williams,75-70,Illinois,St. Louis,Mo.
+2004,Connecticut,33-6,Jim Calhoun,82-73,Georgia Tech,San Antonio,Texas
+2003,Syracuse,30-5,Jim Boeheim,81-78,Kansas,New Orleans,La.
+2002,Maryland,32-4,Gary Williams,64-52,Indiana,Atlanta,Ga.
+2001,Duke,35-4,Mike Krzyzewski,82-72,Arizona,Minneapolis,Minn.
+2000,Michigan State,32-7,Tom Izzo,89-76,Florida,Indianapolis,Ind.
+1999,Connecticut,34-2,Jim Calhoun,77-74,Duke,St. Petersburg,Fla.
+1998,Kentucky,35-4,Tubby Smith,78-69,Utah,San Antonio,Texas
+1997,Arizona,25-9,Lute Olson,84-79 (OT),Kentucky,Indianapolis,Ind.
+1996,Kentucky,34-2,Rick Pitino,76-67,Syracuse,East Rutherford,N.J.
+1995,UCLA,31-2,Jim Harrick,89-78,Arkansas,Seattle,Wash.
+1994,Arkansas,31-3,Nolan Richardson,76-72,Duke,Charlotte,N.C.
+1993,North Carolina,34-4,Dean Smith,77-71,Michigan,New Orleans,La.
+1992,Duke,34-2,Mike Krzyzewski,71-51,Michigan,Minneapolis,Minn.
+1991,Duke,32-7,Mike Krzyzewski,72-65,Kansas,Indianapolis,Ind.
+1990,UNLV,35-5,Jerry Tarkanian,103-73,Duke,Denver,Colo.
+1989,Michigan,30-7,Steve Fisher,80-79 (OT),Seton Hall,Seattle,Wash.
+1988,Kansas,27-11,Larry Brown,83-79,Oklahoma,Kansas City,Mo.
+1987,Indiana,30-4,Bob Knight,74-73,Syracuse,New Orleans,La.
+1986,Louisville,32-7,Denny Crum,72-69,Duke,Dallas,Texas
+1985,Villanova,25-10,Rollie Massimino,66-64,Georgetown,Lexington,Ky
+1984,Georgetown,34-3,John Thompson,84-75,Houston,Seattle,Wash.
+1983,North Carolina State,26-10,Jim Valvano,54-52,Houston,Albuquerque,N.M.
+1982,North Carolina,32-2,Dean Smith,63-62,Georgetown,New Orleans,La.
+1981,Indiana,26-9,Bob Knight,63-50,North Carolina,Philadelphia,Pa.
+1980,Louisville,33-3,Denny Crum,59-54,UCLA,Indianapolis,Ind.
+1979,Michigan State,26-6,Jud Heathcote,75-64,Indiana State,Salt Lake City,Utah
+1978,Kentucky,30-2,Joe Hall,94-88,Duke,St. Louis,Mo.
+1977,Marquette,25-7,Al McGuire,67-59,North Carolina,Atlanta,Ga.
+1976,Indiana,32-0,Bob Knight,86-68,Michigan,Philadelphia,Pa.
+1975,UCLA,28-3,John Wooden,92-85,Kentucky,San Diego,Calif.
+1974,North Carolina State,30-1,Norm Sloan,76-64,Marquette,Greensboro,N.C.
+1973,UCLA,30-0,John Wooden,87-66,Memphis State,St. Louis,Mo.
+1972,UCLA,30-0,John Wooden,81-76,Florida State,Los Angeles,Calif.
+1971,UCLA,29-1,John Wooden,68-62,Villanova,Houston,Texas
+1970,UCLA,28-2,John Wooden,80-69,Jacksonville,College Park,Md.
+1969,UCLA,29-1,John Wooden,92-72,Purdue,Louisville,Ky.
+1968,UCLA,29-1,John Wooden,78-55,North Carolina,Los Angeles,Calif.
+1967,UCLA,30-0,John Wooden,79-64,Dayton,Louisville,Ky.
+1966,UTEP,28-1,Don Haskins,72-65,Kentucky,College Park,Md.
+1965,UCLA,28-2,John Wooden,91-80,Michigan,Portland,Ore.
+1964,UCLA,30-0,John Wooden,98-83,Duke,Kansas City,Mo.
+1963,Loyola,Ill.,George Ireland,60-58 (OT),Cincinnati,Louisville,Ky.
+1962,Cincinnati,29-2,Ed Jucker,71-59,Ohio State,Louisville,Ky.
+1961,Cincinnati,27-3,Ed Jucker,70-65 (OT),Ohio State,Kansas City,Mo.
+1960,Ohio State,25-3,Fred Taylor,75-55,California,Daly City,Calif.
+1959,California,25-4,Pete Newell,71-70,West Virginia,Louisville,Ky.
+1958,Kentucky,23-6,Adolph Rupp,84-72,Seattle,Louisville,Ky.
+1957,North Carolina,32-0,Frank McGuire,54-53 (3OT),Kansas,Kansas City,Mo.
+1956,San Francisco,29-0,Phil Woolpert,83-71,Iowa,Evanston,Ill.
+1955,San Francisco,28-1,Phil Woolpert,77-63,LaSalle,Kansas City,Mo.
+1954,La Salle,26-4,Ken Loeffler,92-76,Bradley,Kansas City,Mo.
+1953,Indiana,23-3,Branch McCracken,69-68,Kansas,Kansas City,Mo.
+1952,Kansas,28-3,Phog Allen,80-63,St. John's,Seattle,Wash.
+1951,Kentucky,32-2,Adolph Rupp,68-58,Kansas State,Minneapolis,Minn.
+1950,CCNY,24-5,Nat Holman,71-68,Bradley,New York,N.Y.
+1949,Kentucky,32-2,Adolph Rupp,46-36,Oklahoma A&M,Seattle,Wash.
+1948,Kentucky,36-3,Adolph Rupp,58-42,Baylor,New York,N.Y.
+1947,Holy Cross,27-3,Doggie Julian,58-47,Oklahoma,New York,N.Y.
+1946,Oklahoma State,31-2,Henry Iba,43-40,North Carolina,New York,N.Y.
+1945,Oklahoma State,27-4,Henry Iba,49-45,NYU,New York,N.Y.
+1944,Utah,21-4,Vadal Peterson,42-40 (OT),Dartmouth,New York,N.Y.
+1943,Wyoming,31-2,Everett Shelton,46-34,Georgetown,New York,N.Y.
+1942,Stanford,28-4,Everett Dean,53-38,Dartmouth,Kansas City,Mo.
+1941,Wisconsin,20-3,Bud Foster,39-34,Washington State,Kansas City,Mo.
+1940,Indiana,20-3,Branch McCracken,60-42,Kansas,Kansas City,Mo.
+1939,Oregon,29-5,Howard Hobson,46-33,Ohio State,Evanston,Ill.

@@ -1,19 +1,13 @@
 
 
 ---
-title: "R Markdown Centered Data Analysis Workflow Using Vim"
+title: "R Markdown Centered Data Analysis Workflow"
 subtitle: "(bonus: how to use Python in R Markdown using reticulate)"
-date: "2019-10-16 (updated `r Sys.Date()`)"
+date: "2019-10-16 <br>(updated `r Sys.Date()`)"
 output:
-  html_document:
+  pdf_document:
     toc: true
-    toc_float: false
     number_sections: true
-    theme: united
-    highlight: textmate
-    code_folding: show
-    code_download: true
-    keep_md: true
 ---
 
 # Introduction
@@ -63,7 +57,7 @@ use_python(python3_path) # python3_path is defined in my .Rprofile
 
 ```
 
-### Running R code snippets within Rmd document 
+### Running R code snippets within Rmd document directly
 
 We can run simple R code snippets like below.
 
@@ -124,9 +118,11 @@ hello("Jay")
 - This allows functions to be defined in another .R script, then used in the home (Rmd) document
 - The home Rmd document can become clogged easily still
 
-### Running R script files within Rmd document
+### Displaying outputs from R script files within Rmd document
 
-Below, we source "src_r_script.R" file in an R chunk, which has the same commands as the r_snippet_2 chunk. While writing the src_r_script.R code, I'd made sure each line works as intended from a separate R session. This ensures
+Another common (more realistic?) scenario in data analysis project is to start analysis by reading in data stored in a separate directory (e.g., data/), perform data transformation, then generate some tables/plots.
+
+Below, we source "src_r_script.R" file in an R chunk, which reads in a data, summarizes it, and outputs a table and a plot. While writing the src_r_script.R code, I'd made sure each line works as intended from a separate R session. This ensures
 
 - the source script works, and
 - the findings/narratives can be added to home (Rmd) document without having to render the whole Rmd document 
@@ -139,9 +135,8 @@ source("R/src_r_script.R")
 
 Findings/narratives from the above R script follow immediately, and also more importantly without having to render the whole Rmd document, as the source R script was run and output was checked in a separate session (session "R").
 
-- Note the ggplot object at the end of the src_r_script.R had to be saved to a variable and printed manually. Without such manual print command, the plot wouldn't display in rendered Rmd document.  
-- UNC won more games than Duke in NCAA tourney since 1949-50 season
-- but they lost more games too
+- Note any objects in the src_r_script.R that I want to be displayed in the rendered document had to be saved to a variable and printed manually. Check out R/src_r_script.R file. Without such manual print command, the plot wouldn't display in rendered Rmd document.  
+- I can't wait to see how Duke handles coach K's retirement (when it happens)
 
 ## Working with Python codes
 
@@ -201,7 +196,11 @@ hello("Jay")
 
 Note that we can run functions from the imported module as well, e.g., we imported all functions from py_udfs.py and used one of its functions 'hello' above.
 
-### Running Python script files within Rmd document
+### Displaying outputs from Python script files within Rmd document
+
+Again, a typical data analysis starts by reading in data from a separate directory, performs data transform, and outputs tables/plots. 
+
+First I tried using reticulate::source_python() function, but unfortunately, the outputs from the source Python script file didn't display at all in the rendered document (regardless of backends I used: 'agg' and 'x11'). I have yet to find the answer as to why. 
 
 ```{r run_py_script2, eval = TRUE}
 # note language engine here is R, not Python, although we're running Python code!
@@ -209,26 +208,43 @@ source_python("py/src_python_script.py") # without "scratch/" in filename
 
 ```
 
-- unfortunately, using source_python() in an R chunk didn't display plots (at all) in the rendered doc (tried both agg and x11 backend)
-- not sure why so
+Instead, using execfile within a Python chunk prints the outputs from the Python script files. 
 
 ```{python run_py_script3, eval = TRUE}
-# execfile seems to be the closest thing to R's source command (Python2)
-exec(open("py/src_python_script.py").read())
+# execfile seems to be the closest thing to R's source command
+# execfile("py/src_python_script.py") # for Python2
+exec(open("py/src_python_script.py").read()) # for Python3
 
 ```
 
-This worked! Since analyses are typically procedural, above approach should suffice in many cases. 
+- It's fun coding in different languages! 
 
-### Running Python code snippet using R objects
+## Working R and Python together
 
-- Can also run python snippets from within Rmd document. 
-- All required modules are imported in earlier setup_py chunk. 
-- My personal preference is, if you can work with Python directly, why rely on R? (and same for using Python objects in R chunk)
+Lastly, we can also run R code snippets using Python objects that are defined earlier in R Markdown (and vice versa, i.e., run Python code snippets using R objects). 
+
+If you are more comfortable working with ggplot2 in R than say pyplot in Python, then you can use Python objects in an R chunk like below.
+
+```{r r_snippet_using_py_objs, eval = TRUE}
+# note 'df' is a Python object defined in the earlier py_snippet_1 chunk
+# and is accessible by 'py' with $
+df_r = py$df
+df_r %>% count(x1) %>%
+         ggplot(aes(x = x1, y = n))  +
+         geom_bar(stat = "identity") +
+         theme_bw()
+
+```
+
+- Note how Python objects are referred to in an R chunk (by py\$). 
+
+The opposite case is to use R objects in a Python chunk. 
 
 ```{python py_snippet_using_r_objs, eval = TRUE}
-unc_py = r.unc # should have loaded library(uncmbb) beforehand
-print(unc_py.head())
+# note 'unc' is an R object defined in the earlier r_snippet_2 chunk 
+# and is accessible by 'r' object with a dot
+unc_py = r.unc 
+unc_py.head()
 
 unc_py.groupby('Type').size().plot(kind = 'bar')
 plt.show()
@@ -237,8 +253,9 @@ plt.show()
 
 Findings follow:
 
-- Data conversion between R and Python seems challenging
-- Also, interactive checking becomes a bit hard
+- Interactive checking becomes a bit hard (not sure if it's even doable), because R (Python) objects have to be read in from Python (R). 
+- We can start a Python interpreter using reticulate::repl_python() function from an R session (session Rmd). 
+- It feels like magic to me, but data conversion between R and Python seems to work just fine.
 
 # Report output
 

@@ -1,16 +1,17 @@
 
 
-import numpy as np
+
 import pandas as pd
 from matplotlib import pyplot as plt
 
-x1 = ['a', 'b', 'c', 'c', 'c', 'b', 'b', 'a', 'a', 'c']
-x2 = range(10)
-y = [True, False, False, False, True, True, True, False, True, False]
-df = pd.DataFrame(zip(x1, x2, y), columns = ['x1', 'x2', 'y'])
+ncaa = pd.read_csv("data/champions.csv")
 
-# View the data frame
-print(df.head())
+ncaa_grp = ncaa.groupby(["CHAMPION", "COACH"]).size().reset_index(name = 'n').sort_values(by = "n", ascending = False)
+p = ncaa_grp[ncaa_grp.n >= 2]
+print(p)
 
-df.groupby('x1').size().reset_index(name = 'count').plot(kind = 'bar', x = 'x1', y = 'count')
-plt.show(block = False)
+ncaa_grp = ncaa.groupby(["CHAMPION"]).size().reset_index(name = 'n').sort_values(by = "n", ascending = False)
+p = ncaa_grp[ncaa_grp.n >= 3]
+p.plot(kind = 'bar', x = 'CHAMPION', y = 'n', title = "NCAA Men's Basketball Champions (3+ Rings Club!)")
+plt.show()
+
