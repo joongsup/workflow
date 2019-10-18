@@ -5,12 +5,20 @@ title: "R Markdown Centered Data Analysis Workflow"
 subtitle: "(bonus: how to use Python in R Markdown using reticulate)"
 date: "2019-10-16 <br>(updated `r Sys.Date()`)"
 output:
-  html_document:
+  pdf_document:
     toc: true
     number_sections: true
-    theme: united
-    highlight: textmate
+    theme: flatly
+    highlight: kate
 ---
+
+```{r global_options, include = FALS, include = FALSE}
+
+knitr::opts_chunk$set(fig.width=8, fig.height=6, eval = TRUE)
+
+```
+
+
 
 # Introduction
 
@@ -84,7 +92,7 @@ head(df)
 
 df %>%  ggplot(aes(x = Result, y = n)) +
         geom_bar(aes(fill = school), stat = "identity", position = "dodge") +
-        geom_text(aes(group = school, label = n), position = position_dodge(width = 1), vjust = 0.01) +
+        geom_text(aes(group = school, label = n), position = position_dodge(width = 1)) +
         labs(title = "UNC and Duke's NCAA results since 1949-1950 season") +
         theme_bw()
 
@@ -139,7 +147,7 @@ source("R/src_r_script.R")
 
 Findings/narratives from the above R script follow immediately, and also more importantly without having to render the whole Rmd document, as the source R script was run and output was checked in a separate session (session "R").
 
-- Note any objects in the src_r_script.R that I want to be displayed in the rendered document had to be saved to a variable and printed manually. Check out R/src_r_script.R file. Without such manual print command, the plot wouldn't display in rendered Rmd document.  
+- Note any objects in the src_r_script.R that I want to be displayed in the rendered document had to be saved to a variable and printed manually. Check out [R/src_r_script.R](R/src_r_script.R) file. Without such manual print command, the plot wouldn't display in rendered Rmd document.  
 - I can't wait to see how Duke handles coach K's retirement (when it happens)
 
 ## Working with Python codes
@@ -206,7 +214,7 @@ Again, a typical data analysis starts by reading in data from a separate directo
 
 First I tried using reticulate::source_python() function, but unfortunately, the outputs from the source Python script file didn't display at all in the rendered document (regardless of backends I used: 'agg' and 'x11'). I have yet to find the answer as to why. 
 
-```{r run_py_script2, eval = TRUE}
+```{r run_py_script2}
 # note language engine here is R, not Python, although we're running Python code!
 source_python("py/src_python_script.py") # without "scratch/" in filename
 
@@ -214,7 +222,7 @@ source_python("py/src_python_script.py") # without "scratch/" in filename
 
 Instead, using execfile within a Python chunk prints the outputs from the Python script files. 
 
-```{python run_py_script3, eval = TRUE}
+```{python run_py_script3}
 # execfile seems to be the closest thing to R's source command
 # execfile("py/src_python_script.py") # for Python2
 exec(open("py/src_python_script.py").read()) # for Python3
@@ -222,6 +230,9 @@ exec(open("py/src_python_script.py").read()) # for Python3
 ```
 
 - It's fun coding in different languages! 
+- Interestingly, the table gets printed in interactive Rmd session, but not the plot. Instead it prints the following warning:
+    - "UserWarning: Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure."
+    - I didn't know what [backend](https://matplotlib.org/faq/usage_faq.html#what-is-interactive-mode) even was before, but it seemed quite important in making sure plots are printed on the final rendered document.
 
 ## Working R and Python together
 
@@ -231,7 +242,7 @@ Lastly, we can also run R code snippets using Python objects that are defined ea
 
 If you are more comfortable working with ggplot2 in R than say pyplot in Python, then you can use Python objects in an R chunk like below.
 
-```{r r_snippet_using_py_objs, eval = TRUE}
+```{r r_snippet_using_py_objs}
 # note 'df' is a Python object defined in the earlier py_snippet_1 chunk
 # and is accessible by 'py' with $
 df_r = py$df
@@ -248,7 +259,7 @@ df_r %>% count(x1) %>%
 
 The opposite case is to use R objects in a Python chunk. 
 
-```{python py_snippet_using_r_objs, eval = TRUE}
+```{python py_snippet_using_r_objs}
 # note 'unc' is an R object defined in the earlier r_snippet_2 chunk 
 # and is accessible by 'r' object with a dot
 unc_py = r.unc 
