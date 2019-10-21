@@ -8,8 +8,8 @@ output:
   pdf_document:
     toc: true
     number_sections: true
-    theme: flatly
-    highlight: kate
+    #theme: flatly
+    #highlight: kate
 ---
 
 ```{r global_options, include = FALS, include = FALSE}
@@ -78,7 +78,7 @@ plot(iris)
 
 ```
 
-- Note that 'print' command was not needed to actually print output of the head and plot commands
+- Note that `print` command was not needed to actually print output of the head and plot commands
 
 When some R packages are needed, best practice is to load them in setup chunk, generally found in the beginning of the Rmd document.
 
@@ -98,7 +98,7 @@ df %>%  ggplot(aes(x = Result, y = n)) +
 
 ``` 
 
-- Again, output from 'head' and 'ggplot' commands were displayed without manual printing.
+- Again, output from `head` and `ggplot` commands were displayed without manual printing.
 
 Objects from above R code snippets can be accessed/used throughout this Rmd document, typically when describing the findings from the snippet. E.g., below findings are calculated inline using objects from above chunk. 
 
@@ -109,14 +109,14 @@ Since 1949-1950 season,
 
 Findings follow:
 
-- Note again that if snippets are run within Rmd, then no manual print command is needed to print plot.
+- Note again that if snippets are run within Rmd, then no manual `print` command is needed to print plot.
 - The home (Rmd) document can become clogged easily.
 
-So we've seen how we can use R code snippets in Rmd document, which can be effective for small operations. For more complex operations that require a bit more lines of codes, working directly with code snippets within Rmd document may not be ideal for various reasons. In this case, we can save those (many) lines of codes in separate script files, then source them in Rmd document. First, a hybrid of the two:
+So we've seen how we can use R code snippets in Rmd document, which can be effective for small operations. For more complex operations that require a bit more lines of codes, working directly with code snippets within Rmd document may not be ideal for various reasons. In this case, we can save those (many) lines of codes in separate script files, then source them in Rmd document. First, a hybrid of the two is using functions defined in a separate R script file in the home (Rmd) document.
 
 ### Importing functions from R script files then use them within Rmd document
 
-We can source .R scripts within an R chunk and use functions defined in .R scripts.
+We can source .R scripts within an R chunk and use functions defined in .R scripts. Below, we source [R/r_udfs.R](R/r_udfs.R) file, which has a definition for a function called `hello`, and we can use it in subsequent chunks of the home (Rmd) document. 
 
 ```{r r_snippet_and_script}
 # hello function from R/r_udfs.R
@@ -125,8 +125,6 @@ hello("Jay")
 
 ```
 
-We can describe what the source R script file does here.
-
 - This allows functions to be defined in another .R script, then used in the home (Rmd) document
 - Above example uses only one function from the source R script file, but the chunk can become clogged easily just as in the case of running code snippets directly from the home (Rmd) document. 
 
@@ -134,7 +132,7 @@ We can describe what the source R script file does here.
 
 Another common (more realistic?) scenario in data analysis project is to start analysis by reading in data stored in a separate directory (e.g., data/), perform data transformation, then generate some tables/plots.
 
-Below, we source "src_r_script.R" file in an R chunk, which reads in a data, summarizes it, and outputs a table and a plot. While writing the src_r_script.R code, I'd made sure each line works as intended from a separate R session. This ensures
+Below, we source [R/src_r_script.R](R/src_r_script.R) file in an R chunk, which reads in a data, summarizes it, and outputs a table and a plot. While writing the [R/src_r_script.R](R/src_r_script.R) code, I'd made sure each line works as intended from a separate R session. This ensures
 
 - the source script works, and
 - the findings/narratives can be added to home (Rmd) document without having to render the whole Rmd document 
@@ -147,7 +145,7 @@ source("R/src_r_script.R")
 
 Findings/narratives from the above R script follow immediately, and also more importantly without having to render the whole Rmd document, as the source R script was run and output was checked in a separate session (session "R").
 
-- Note any objects in the src_r_script.R that I want to be displayed in the rendered document had to be saved to a variable and printed manually. Check out [R/src_r_script.R](R/src_r_script.R) file. Without such manual print command, the plot wouldn't display in rendered Rmd document.  
+- Note any objects in the [R/src_r_script.R](R/src_r_script.R) that I want to be displayed in the rendered document had to be saved to a variable and printed manually. Without such manual `print` command, the plot wouldn't display in rendered Rmd document.  
 - I can't wait to see how Duke handles coach K's retirement (when it happens)
 
 ## Working with Python codes
@@ -179,7 +177,7 @@ Finding follows:
 
 - A toy dataframe is hard(er) to put together in Python than in R!
 
-We can check this Python code snippet works from a separate **Python** session. 
+We can check this Python code snippet works from a separate **Python** session (e.g., session 'Python'). 
 
 It's preferable to first create a setup chunk specifically for Python codes, like that for R.
 
@@ -199,6 +197,8 @@ It seems once a python chunk is called, a separate python session is created and
 
 ### Importing functions from Python script files then use them within Rmd document
 
+Just like we used a function defined in a separate R script file in the home (Rmd) document by sourcing the the R script file, we can do a similar thing with Python functions and script files. 
+
 ```{python py_snippet_and_script}
 # hello function from py/py_udfs.py
 from py.py_udfs import * 
@@ -206,13 +206,13 @@ hello("Jay")
 
 ```
 
-Note that we can run functions from the imported module as well, e.g., we imported all functions from py_udfs.py and used one of its functions 'hello' above.
+Note that we imported a Python script file [py/py_udfs.py](py/py_udfs.py), called a "module" in Python lingo, in the above chunk, and used a function called `hello` defined in it.
 
 ### Displaying outputs from Python script files within Rmd document
 
 Again, a typical data analysis starts by reading in data from a separate directory, performs data transform, and outputs tables/plots. 
 
-First I tried using reticulate::source_python() function, but unfortunately, the outputs from the source Python script file didn't display at all in the rendered document (regardless of backends I used: 'agg' and 'x11'). I have yet to find the answer as to why. 
+First I tried using [reticulate::source_python()](https://rstudio.github.io/reticulate/reference/source_python.html) function, but unfortunately, the outputs from the source Python script file didn't display at all in the rendered document (regardless of backends I used: 'agg' and 'x11'). I have yet to find the answer as to why. 
 
 ```{r run_py_script2}
 # note language engine here is R, not Python, although we're running Python code!
@@ -220,21 +220,24 @@ source_python("py/src_python_script.py") # without "scratch/" in filename
 
 ```
 
-Instead, using execfile within a Python chunk prints the outputs from the Python script files. 
+On the otherhand, using Python's `execfile/exec` function within a Python chunk did print the outputs from the Python script files. Below, we are sourcing [py/src_python_script.py](py/src_python_sript.py) Python script file in a Python chunk and displays the results from the module. In this sense, Python's `execfile/exec` function seems to be the closest thing to R's `source` command
 
 ```{python run_py_script3}
-# execfile seems to be the closest thing to R's source command
+
 # execfile("py/src_python_script.py") # for Python2
 exec(open("py/src_python_script.py").read()) # for Python3
 
 ```
 
-- It's fun coding in different languages! 
-- Interestingly, the table gets printed in interactive Rmd session, but not the plot. Instead it prints the following warning:
-    - "UserWarning: Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure."
-    - I didn't know what [backend](https://matplotlib.org/faq/usage_faq.html#what-is-interactive-mode) even was before, but it seemed quite important in making sure plots are printed on the final rendered document.
+- It's fun coding in different languages!
+- Note slightly different function calls, depending on Python2 and Python3
+- While the intended plots are correctly printed on the rendered document, something else happend in the console (interactive session Rmd). Interestingly, while the first output (i.e., a table of coaches with 2+ rings) gets printed in interactive Rmd session, the second output (i.e., a plot of schools with 3+ rings). Instead it prints the following warning:
+    - "UserWarning: Matplotlib is currently using agg, which is a non-GUI _backend_, so cannot show the figure."
+    - As long as the rendered document (e.g., html or pdf) contains the outputs (i.e., tables and plots) I wanted, there's nothing to worry about. 
+    - I just wanted to call out something new that I had to learn here while it was mentioned: [backend](https://matplotlib.org/faq/usage_faq.html#what-is-a-backend). I don't think I've ever had to deal with it before, but it took me a while to finally have all the plots^[It was always plots, not tables, that gave me headaches (e.g., as in, "why are you NOT there?" in the rendered document.] displayed in the final rendered document, and switching this backend to 'agg' (see setup_py chunk) was the magic that did it for me.
+- Another important lesson for me was how to `import` Python script files ('modules') in another Python file, which deserves its own posting, but suffice to say, it was **different**!
 
-## Working R and Python together
+## Working with R and Python together
 
 Lastly, we can also run R code snippets using Python objects that are defined earlier in R Markdown (and vice versa, i.e., run Python code snippets using R objects). 
 
@@ -270,10 +273,9 @@ plt.show()
 
 ```
 
-Findings follow:
-
+- Note how R objects are referred to in an Python chunk (by "r.").
 - Interactive checking becomes a bit hard (not sure if it's even doable), because R (Python) objects have to be read in from Python (R). 
-- We can start a Python interpreter using reticulate::repl_python() function from an R session (session Rmd). 
+    - We can start a Python interpreter using `reticulate::repl_python()` function from an R session (session "Rmd"), but even so, I have yet to find out how to interactively check codes in this context. 
 - It feels like magic to me, but data conversion between R and Python seems to work just fine.
 
 # Report output
@@ -282,23 +284,27 @@ Once all source codes are run and findings/narratives are documented, we can go 
 
 There are several options to view the output document. 
 
-1. If no file transfer is required (e.g., all files are already in local machine), open the output in a browser
+1. If no file transfer is required (e.g., all files are already in local machine), open the output using available viewer (e.g., a web browser for html output)
 2. If file transfer is needed (e.g., some files are generated in remote machine), then
-    - send email from R with attachment 
-    - SimpleHTTPServer from Python
+    - send email from R with attachment (e.g., see [sendmailR](https://cran.r-project.org/web/packages/sendmailR/index.html) package)
+    - [SimpleHTTPServer](https://docs.python.org/2/library/simplehttpserver.html) or [http.server](https://docs.python.org/3/library/http.server.html) module from Python
 
 # R Markdown centered data analysis workflow (using Vim)
 
 1. Start three Vim/REPL paired sessions
-    - Session Rmd: for home (Rmd) document editing and interactive R computing
-    - Session R: for R script editing and interactive R computing
-    - Sesion Py: for Py script editing and interactive Python computing
+    - Session Rmd
+        - for home (Rmd) document editing and interactive R computing
+    - Session R
+        - for R script editing and interactive R computing
+    - Sesion Py
+        - for Py script editing and interactive Python computing
 
-2. Start documenting project progress
+2. Start documenting project progress in session "Rmd"
     - Provide context and describe data, etc. 
+    - If needed, code directly in the home (Rmd) document
 
-3. Iteratively work on codes (R/Python), generate plots, and document findings 
-    - Make sure codes run successfully by checking outputs from each corresponding session (e.g., check R codes work in session R, and Python codes work in session Py) 
+3. If needed, iteratively work on codes (R/Python) in the other sessions (sessions "R" or "Python"), generate plots, and document findings 
+    - Make sure codes run successfully by checking outputs from each corresponding session (e.g., check R codes work in session "R", and Python codes work in session "Python") 
     - If findings are worth noting, document them in home (Rmd) document, immediately following code chunks
     - Also document what needs to be done
 
