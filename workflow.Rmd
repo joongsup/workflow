@@ -194,6 +194,8 @@ plt.switch_backend('agg') # switch to 'agg' bakend, not X11, in order to disable
 ```
 
 It seems once a python chunk is called, a separate python session is created and maintained throughout the live/active source Rmd document lifetime, therefore allowing the use of imported functions in the subsequent python chunks.
+    - Turns out to be correct. See [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/language-engines.html#python)
+    - Lucky too, as the persistence of previous chunk objects are only for R, Python, and Julia
 
 ### Importing functions from Python script files then use them within Rmd document
 
