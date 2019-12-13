@@ -16,3 +16,5 @@ For a final document, see
 - [html document](http://htmlpreview.github.com/?https://github.com/joongsup/workflow/blob/master/workflow.html)
 - [pdf document](workflow.pdf)
 
+## Alternative
+For an alternative approach to R Markdown centered workflow using Jupyter notebook, see [jupyter/](jupyter/) directory. 
